@@ -117,7 +117,6 @@ fi
 alias open="nautilus"
 alias cls="clear"
 alias pi="ssh alex@10.0.0.3"
-alias ls="ls --color=always"
 
 
 #Pathon path requirements
