@@ -114,11 +114,9 @@ if ! shopt -oq posix; then
 fi
 
 #USER ALIASES
-alias cd..="cd .."
 alias open="nautilus"
 alias cls="clear"
 alias pi="ssh alex@10.0.0.3"
-
 
 
 #Pathon path requirements
