@@ -17,3 +17,19 @@ export CLICOLOR=1
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 #Full directory paths please
 export PS1='\u\[\033[01;37m\]@hackintosh:\w\$ '
+#function to keep school repo updated
+schoolsync(){
+    if [ -z "$1" ]
+    then
+        echo "No commit message supplied";
+    else 
+        prevDir=$(pwd)
+        cd ~/school
+        git add --all;          
+        git commit -m "$1"
+        git push
+        cd $prevDir
+        echo "Commited with message: $1"; 
+    fi  
+    } 
+alias schoolsync=schoolsync
