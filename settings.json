@@ -1,0 +1,91 @@
+// Place your settings in this file to overwrite the default settings
+{
+
+"files.exclude": {
+     "**/.git": true,
+     "**/.svn": true,
+     "**/.hg": true,
+     "**/.DS_Store": true, 
+     "*.a":true, 
+},
+
+  // Personally, I have not gotten this working yet. So I would suggest hardcoding the gopath for the workspace
+  // this file refers to.
+  "go.inferGopath": false,
+  "go.gopath": "/home/alex/workspace/multi-server",
+  "go.toolsGopath": "/home/alex/workspace/goStuff",
+  // If you'll be using some of the "test on save" features below, you'll want this off. Also, there's a performance
+  // hit for turning this on, typically.
+  "files.autoSave": "off",
+ 
+  // MUST have for other features to work. Typically tools only run after a build
+  "go.buildOnSave": true,
+ 
+  // For multi-server, this is a must have to get everything working
+  "go.buildTags": "test mmw",
+ 
+  // MUST have these enabled. Otherwise, your code reviewers are going to get mad.
+  "go.lintOnSave": true,
+  "go.lintTool": "golint",
+  "go.vetOnSave": true,
+  "go.formatOnSave": true,
+
+
+  // Use goimports, or goreturns here. goreturns is goimports + on save it'll automatically populate
+// empty return values.
+"go.formatTool": "goreturns",
+ 
+// Experimental: Not available in Windows. Use Go language server from Sourcegraph for Hover, Definition, Find All References, Signature Help, File Outline and Workspace Symbol features
+"go.useLanguageServer": true,
+ 
+// Complete functions with their parameter signature
+"go.useCodeSnippetsOnFunctionSuggest": true,
+ 
+ 
+// Experimental Feature: Enable/Disable entries from the context menu in the editor.
+"go.editorContextMenuCommands": {
+  "toggleTestFile": true,
+  "addTags": false,
+  "removeTags": false,
+  "testAtCursor": true,
+  "testFile": true,
+  "testPackage": true,
+  "generateTestForFunction": true,
+  "generateTestForFile": false,
+  "generateTestForPackage": false,
+  "addImport": false,
+  "testCoverage": true
+},
+
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["leader","w"],
+            "after": ["<C-w>"]
+        }
+    ],
+
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["leader","w"],
+            "after": ["<C-w>"]
+        }
+    ],
+
+"vim.leader":"<space>",
+            "vim.handleKeys": {
+        "<C-f>": false, 
+        "<C-c>": false,
+        "<C-k>": false, // zen mode (ctrl k z)
+    },
+
+      // Enable usage data and errors to be sent to Microsoft.
+  "telemetry.enableTelemetry": false,
+
+  // Enable crash reports to be sent to Microsoft.
+  // This option requires restart to take effect.
+  "telemetry.enableCrashReporter": false,
+}ursive
