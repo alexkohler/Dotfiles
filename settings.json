@@ -1,28 +1,21 @@
 // Place your settings in this file to overwrite the default settings
 {
 
-"files.exclude": {
-     "**/.git": true,
-     "**/.svn": true,
-     "**/.hg": true,
-     "**/.DS_Store": true, 
-     "*.a":true, 
-},
 
   // Personally, I have not gotten this working yet. So I would suggest hardcoding the gopath for the workspace
   // this file refers to.
   "go.inferGopath": false,
-  "go.gopath": "/home/alex/workspace/multi-server",
-  "go.toolsGopath": "/home/alex/workspace/goStuff",
+  "go.gopath": "/home/alex/workspace/bleh-server",
+  "go.goroot": "/home/alex/go1.7.5",
   // If you'll be using some of the "test on save" features below, you'll want this off. Also, there's a performance
   // hit for turning this on, typically.
   "files.autoSave": "off",
  
   // MUST have for other features to work. Typically tools only run after a build
-  "go.buildOnSave": true,
+  "go.buildOnSave": "off",
  
   // For multi-server, this is a must have to get everything working
-  "go.buildTags": "test mmw",
+  "go.buildTags": "test mmw hygiene_leap_core_dependency",
  
   // MUST have these enabled. Otherwise, your code reviewers are going to get mad.
   "go.lintOnSave": true,
@@ -36,10 +29,10 @@
 "go.formatTool": "goreturns",
  
 // Experimental: Not available in Windows. Use Go language server from Sourcegraph for Hover, Definition, Find All References, Signature Help, File Outline and Workspace Symbol features
-"go.useLanguageServer": true,
+"go.useLanguageServer": false,
  
 // Complete functions with their parameter signature
-"go.useCodeSnippetsOnFunctionSuggest": true,
+"go.useCodeSnippetsOnFunctionSuggest": false,
  
  
 // Experimental Feature: Enable/Disable entries from the context menu in the editor.
@@ -57,29 +50,36 @@
   "testCoverage": true
 },
 
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j","j"],
-            "after": ["<Esc>"]
-        },
-        {
-            "before": ["leader","w"],
-            "after": ["<C-w>"]
-        }
-    ],
+     "vim.insertModeKeyBindings": [
+         {
+             "before": ["j","j"],
+             "after": ["<Esc>"]
+         },
+     ],
 
-    "vim.otherModesKeyBindingsNonRecursive": [
-        {
-            "before": ["leader","w"],
-            "after": ["<C-w>"]
-        }
-    ],
+     "vim.otherModesKeyBindingsNonRecursive": [
+         {
+             "before": ["leader","w"],
+             "after": ["<C-w>"]
+         },
+         {
+             "before": ["\\"],
+             "after": [],
+             "commands": [
+                 {
+                     "command": "workbench.action.findInFiles",
+                     "args": [] 
+                 } 
+             ]
+         }, 
+     ], 
 
-"vim.leader":"<space>",
-            "vim.handleKeys": {
-        "<C-f>": false, 
-        "<C-c>": false,
-        "<C-k>": false, // zen mode (ctrl k z)
+       "vim.leader":"<space>",
+
+     "vim.handleKeys": {
+           "<C-f>": false, 
+           "<C-c>": false,
+           "<C-k>": false, // zen mode (ctrl k z)
     },
 
       // Enable usage data and errors to be sent to Microsoft.
@@ -87,5 +87,14 @@
 
   // Enable crash reports to be sent to Microsoft.
   // This option requires restart to take effect.
-  "telemetry.enableCrashReporter": false,
-}ursive
+  "telemetry.enableCrashReporter": false, 
+
+  "emeraldwalk.runonsave": {
+    "commands": [
+        {
+            "match": ".*.go",
+            "cmd": "/home/alex/bin/go-hygiene"
+        },
+    ]
+    }
+}
