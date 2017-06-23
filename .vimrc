@@ -20,7 +20,7 @@ filetype plugin on
 :map <Leader>tn :tabn <CR>
 :map <Leader>tp :tabp <CR>
 "set makeprg=.$GOPATH/helperScripts/build
-set makeprg=build
+set makeprg="/home/alex/workspace/multi-server/helperScripts/build -a"
 " have to kick vimrc by resourcing because makeprg gets reset for some reason
 :map <Leader>d :GitGutterLineHighlightsToggle <ENTER>
 :map <Leader>nf :NERDTreeFind <ENTER>
@@ -64,7 +64,7 @@ nnoremap KO :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-" Enable NeoComplete at startup - just kidding too slooow
+" Enable NeoComplete at startup
 " autocmd VimEnter * NeoCompleteEnable     
 nmap <leader>nc :NeoCompleteToggle<cr>
 "tagbar
@@ -107,3 +107,6 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 let g:go_fmt_command = "goimports"
 set completeopt-=preview
 "set foldmethod=syntax
+
+"here we goooo
+set relativenumber
