@@ -17,20 +17,28 @@ filetype plugin on
 :map <Leader>c :!  
 :map <Leader>bn :bnext
 :map <Leader>bp :bprev
+:map <Leader>tn :tabn <CR>
+:map <Leader>tp :tabp <CR>
 "set makeprg=.$GOPATH/helperScripts/build
-set makeprg=/home/alex/workspace/multi-server/helperScripts/build
+set makeprg=build
 " have to kick vimrc by resourcing because makeprg gets reset for some reason
-:map <Leader>g :Make -a <ENTER>
-:map <Leader>t :Make -t <ENTER>
 :map <Leader>d :GitGutterLineHighlightsToggle <ENTER>
+:map <Leader>nf :NERDTreeFind <ENTER>
+:map <Leader>p <C-p>
 " please save me from carpal tunnel
 :map <Leader>s :w <ENTER> 
+:map <Leader>u  <C-U>
+:map <Leader>d  <C-D>
 " Remap that pesky escape key
 ino jj <esc>
 cno jj <c-c> 
 
+" Toggle highlight
+map <leader>h :set hlsearch!<cr>
+
 " NERDTree shortcut
 nmap <leader>ne :NERDTreeToggle<cr>
+let g:NERDTreeWinSize=50
 " Kick vim and make sure we're getting all 256 colors!
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
@@ -50,14 +58,15 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" bind K to grep word under cursor
+" bind KO to grep word under cursor
 nnoremap KO :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-" Enable NeoComplete at startup
-autocmd VimEnter * NeoCompleteEnable     
+" Enable NeoComplete at startup - just kidding too slooow
+" autocmd VimEnter * NeoCompleteEnable     
+nmap <leader>nc :NeoCompleteToggle<cr>
 "tagbar
 let g:tagbar_type_go = {  
     \ 'ctagstype' : 'go',
@@ -97,3 +106,4 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 " Run gofmt on save
 let g:go_fmt_command = "goimports"
 set completeopt-=preview
+"set foldmethod=syntax
