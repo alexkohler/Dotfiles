@@ -449,6 +449,12 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
+"""" jj to escape
+ino jj <esc>
+cno jj <c-c>
+
+"" No match parens to help my eyes
+let loaded_matchparen = 1
 
 " go
 " vim-go
