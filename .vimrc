@@ -47,12 +47,9 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
-if isdirectory('/usr/local/opt/fzf')
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-else
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-  Plug 'junegunn/fzf.vim'
-endif
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
@@ -103,6 +100,25 @@ filetype plugin indent on
 "*****************************************************************************
 "" Basic Setup
 "*****************************************************************************"
+"" Remap that pesky escape key
+ino jj <esc>
+cno jj <c-c> 
+
+"" line wrap
+""imap <silent> <Down> <C-o>gj
+""imap <silent> <Up> <C-o>gk
+""nmap <silent> <Down> gj
+""nmap <silent> <Up> gk
+
+
+:map j gj
+:map k gk
+
+set mouse=a
+
+"" No match parens to help my eyes
+let loaded_matchparen = 1
+
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -158,9 +174,11 @@ set ruler
 set number
 
 let no_buffers_menu=1
-if !exists('g:not_finish_vimplug')
-  colorscheme molokai
-endif
+"if !exists('g:not_finish_vimplug')
+  "colorscheme molokai
+"endif
+"set background=dark
+"colorscheme solarized
 
 set mousemodel=popup
 set t_Co=256
@@ -226,6 +244,7 @@ endif
 
 " vim-airline
 let g:airline_theme = 'powerlineish'
+" disable syntastic because it's annoying
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -256,11 +275,11 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-noremap <F3> :NERDTreeToggle<CR>
+nnoremap <leader>nf  :NERDTreeFind<CR>
+noremap <leader>ne :NERDTreeToggle<CR>
 
 " grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
+nnoremap <silent> <leader>f :Rgrep -i <CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
@@ -403,9 +422,7 @@ if has('autocmd')
 endif
 
 "" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+set clipboard=unnamedplus
 
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
@@ -449,12 +466,6 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
-"""" jj to escape
-ino jj <esc>
-cno jj <c-c>
-
-"" No match parens to help my eyes
-let loaded_matchparen = 1
 
 " go
 " vim-go
@@ -472,7 +483,7 @@ let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
 let g:syntastic_go_checkers = ['golint', 'govet']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['go', 'sh', '.py'] }
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -509,7 +520,7 @@ augroup go
   au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 
   au FileType go nmap <leader>r  <Plug>(go-run)
-  au FileType go nmap <leader>t  <Plug>(go-test)
+  au FileType go nmap <leader>t   :GoTestFunc <CR>
   au FileType go nmap <Leader>gt <Plug>(go-coverage-toggle)
   au FileType go nmap <Leader>i <Plug>(go-info)
   au FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
