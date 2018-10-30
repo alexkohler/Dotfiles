@@ -81,6 +81,22 @@
            "<C-c>": false,
            "<C-k>": false, // zen mode (ctrl k z)
     },
+  
+    {
+        "key": "ctrl+shift+g ctrl+shift+g",
+        "command": "workbench.view.scm"
+    
+    },
+    {
+        "key": "ctrl+shift+a ctrl+shift+a",
+        "command": "git.stageAll"
+    },
+
+    {
+        "command": "toggleVim",
+        "key": "ctrl+k ctrl+k"
+    }
+  
 
       // Enable usage data and errors to be sent to Microsoft.
   "telemetry.enableTelemetry": false,
@@ -97,4 +113,6 @@
         },
     ]
     }
+  
+  
 }
